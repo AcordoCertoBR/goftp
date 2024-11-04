@@ -129,8 +129,13 @@ func (c *Client) ReadDir(path string) ([]os.FileInfo, error) {
 
 	parser := parseMLST
 
-	if err != nil {
-		if !commandNotSupporterdError(err) {
+	shouldTryList := false
+	if len(entries) > 0 && !strings.Contains(entries[0], "; ") {
+		shouldTryList = true
+	}
+
+	if err != nil || shouldTryList {
+		if !shouldTryList && !commandNotSupporterdError(err) {
 			return nil, err
 		}
 
