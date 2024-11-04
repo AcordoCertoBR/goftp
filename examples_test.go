@@ -11,7 +11,7 @@ import (
 	"os"
 	"time"
 
-	"github.com/secsy/goftp"
+	"github.com/AcordoCertoBR/goftp"
 )
 
 func Example() {

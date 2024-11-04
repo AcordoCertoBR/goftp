@@ -7,9 +7,9 @@ cd ftpd
 
 ftpd_dir=`pwd`
 
-curl -O ftp://ftp.proftpd.org/distrib/source/proftpd-1.3.5.tar.gz
-tar -xzf proftpd-1.3.5.tar.gz
-cd proftpd-1.3.5
+curl -O ftp://ftp.proftpd.org/distrib/source/proftpd-1.3.8b.tar.gz
+tar -xzf proftpd-1.3.8b.tar.gz
+cd proftpd-1.3.8b
 
 # fix slow tls data connection handshake (https://github.com/proftpd/proftpd/pull/48)
 perl -pi -e 's/(\Qpr_inet_set_proto_nodelay(conn->pool, conn, 1);\E)/$1\n(void) pr_inet_set_proto_cork(conn->wfd, 0);/' contrib/mod_tls.c
@@ -88,9 +88,9 @@ VpOorURz8ETlfAA=
 -----END CERTIFICATE-----
 CERT
 
-curl -O https://download.pureftpd.org/pub/pure-ftpd/releases/obsolete/pure-ftpd-1.0.36.tar.gz
-tar -xzf pure-ftpd-1.0.36.tar.gz
-cd pure-ftpd-1.0.36
+curl -O https://download.pureftpd.org/pub/pure-ftpd/releases/pure-ftpd-1.0.50.tar.gz
+tar -xzf pure-ftpd-1.0.50.tar.gz
+cd pure-ftpd-1.0.50
 
 # build normal binary with explicit tls support
 CFLAGS=$cflags LDFLAGS=$ldflags ./configure --with-nonroot --with-puredb --with-tls --with-certfile=$ftpd_dir/pure-ftpd.pem
@@ -121,4 +121,4 @@ fi
 chmod 600 users.txt
 
 # generate puredb user db file
-pure-ftpd-1.0.36/src/pure-pw mkdb users.pdb -f users.txt
+pure-ftpd-1.0.50/src/pure-pw mkdb users.pdb -f users.txt
